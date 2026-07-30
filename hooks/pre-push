@@ -1,0 +1,9 @@
+#!/bin/sh
+# Blocks the push if Checkstyle finds violations.
+echo "pre-push: running Checkstyle..."
+if ! ./mvnw -q checkstyle:check; then
+    echo "pre-push: Checkstyle violations found — push aborted."
+    echo "Fix them or inspect with: ./mvnw checkstyle:check"
+    exit 1
+fi
+echo "pre-push: Checkstyle OK."

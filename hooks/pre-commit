@@ -1,0 +1,7 @@
+#!/bin/sh
+# Warns about Checkstyle violations but never blocks the commit.
+echo "pre-commit: running Checkstyle (warning only)..."
+if ! ./mvnw -q checkstyle:check; then
+    echo "pre-commit: WARNING — Checkstyle violations found. Commit allowed, but the push will be blocked."
+fi
+exit 0
