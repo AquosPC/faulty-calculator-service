@@ -1,0 +1,170 @@
+openapi: 3.0.3
+info:
+  title: FaultyCalculatorService
+  description: Simple calculator REST API.
+  version: 1.0-SNAPSHOT
+servers:
+  - url: http://localhost:8080
+components:
+  parameters:
+    aDouble:
+      name: a
+      in: query
+      required: true
+      schema:
+        type: number
+        format: double
+    bDouble:
+      name: b
+      in: query
+      required: true
+      schema:
+        type: number
+        format: double
+    aInt:
+      name: a
+      in: query
+      required: true
+      schema:
+        type: integer
+        format: int32
+    bInt:
+      name: b
+      in: query
+      required: true
+      schema:
+        type: integer
+        format: int32
+  responses:
+    doubleResult:
+      description: Result
+      content:
+        application/json:
+          schema:
+            type: number
+            format: double
+    intResult:
+      description: Result
+      content:
+        application/json:
+          schema:
+            type: integer
+            format: int32
+    badRequest:
+      description: Missing or malformed parameter
+paths:
+  /sum:
+    get:
+      summary: Add two numbers
+      parameters:
+        - $ref: '#/components/parameters/aDouble'
+        - $ref: '#/components/parameters/bDouble'
+      responses:
+        '200':
+          $ref: '#/components/responses/doubleResult'
+        '400':
+          $ref: '#/components/responses/badRequest'
+  /subtract:
+    get:
+      summary: Subtract b from a
+      parameters:
+        - $ref: '#/components/parameters/aDouble'
+        - $ref: '#/components/parameters/bDouble'
+      responses:
+        '200':
+          $ref: '#/components/responses/doubleResult'
+        '400':
+          $ref: '#/components/responses/badRequest'
+  /multiply:
+    get:
+      summary: Multiply two numbers
+      parameters:
+        - $ref: '#/components/parameters/aDouble'
+        - $ref: '#/components/parameters/bDouble'
+      responses:
+        '200':
+          $ref: '#/components/responses/doubleResult'
+        '400':
+          $ref: '#/components/responses/badRequest'
+  /divide:
+    get:
+      summary: Divide two integers (integer division)
+      parameters:
+        - $ref: '#/components/parameters/aInt'
+        - $ref: '#/components/parameters/bInt'
+      responses:
+        '200':
+          $ref: '#/components/responses/intResult'
+        '400':
+          $ref: '#/components/responses/badRequest'
+        '500':
+          description: Division by zero
+  /power:
+    get:
+      summary: Raise a to the power b
+      parameters:
+        - $ref: '#/components/parameters/aDouble'
+        - $ref: '#/components/parameters/bDouble'
+      responses:
+        '200':
+          $ref: '#/components/responses/doubleResult'
+        '400':
+          $ref: '#/components/responses/badRequest'
+  /sqrt:
+    get:
+      summary: Square root of a
+      parameters:
+        - $ref: '#/components/parameters/aDouble'
+      responses:
+        '200':
+          $ref: '#/components/responses/doubleResult'
+        '400':
+          $ref: '#/components/responses/badRequest'
+  /modulo:
+    get:
+      summary: Remainder of a divided by b
+      parameters:
+        - $ref: '#/components/parameters/aInt'
+        - $ref: '#/components/parameters/bInt'
+      responses:
+        '200':
+          $ref: '#/components/responses/intResult'
+        '400':
+          $ref: '#/components/responses/badRequest'
+        '500':
+          description: Modulo by zero
+  /average:
+    get:
+      summary: Average of a list of numbers
+      parameters:
+        - name: numbers
+          in: query
+          required: true
+          description: Comma-separated list of numbers (or repeated parameter)
+          schema:
+            type: array
+            items:
+              type: number
+              format: double
+          style: form
+          explode: false
+      responses:
+        '200':
+          $ref: '#/components/responses/doubleResult'
+        '400':
+          $ref: '#/components/responses/badRequest'
+  /factorial:
+    get:
+      summary: Factorial of n
+      parameters:
+        - name: n
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          $ref: '#/components/responses/intResult'
+        '400':
+          $ref: '#/components/responses/badRequest'
