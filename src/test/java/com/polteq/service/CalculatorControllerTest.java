@@ -23,7 +23,7 @@ class CalculatorControllerTest {
     }
 
     @Test
-    void Multiply() throws Exception {
+    void multiply() throws Exception {
         mockMvc.perform(get("/multiply").param("a", "2").param("b", "3"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("6.0"));
