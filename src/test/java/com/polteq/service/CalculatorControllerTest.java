@@ -16,14 +16,14 @@ class CalculatorControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void Sum() throws Exception {
+    void sum() throws Exception {
         mockMvc.perform(get("/sum").param("a", "2").param("b", "3"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("5.0"));
     }
 
     @Test
-    void Multiply() throws Exception {
+    void multiply() throws Exception {
         mockMvc.perform(get("/multiply").param("a", "2").param("b", "3"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("6.0"));
