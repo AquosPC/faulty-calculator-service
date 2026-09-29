@@ -2,6 +2,8 @@ name: Unit test
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
 
 
 jobs:
