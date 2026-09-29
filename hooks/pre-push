@@ -7,3 +7,9 @@ if ! ./mvnw -q checkstyle:check; then
     exit 1
 fi
 echo "pre-push: Checkstyle OK."
+
+if ! ./mvnw test; then
+    echo "pre-push: unit tests failed — push aborted."
+    exit 1
+fi
+echo "pre-push: unit-tests OK."
