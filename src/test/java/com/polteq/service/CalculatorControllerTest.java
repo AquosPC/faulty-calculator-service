@@ -16,7 +16,7 @@ class CalculatorControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void sum() throws Exception {
+    void Sum() throws Exception {
         mockMvc.perform(get("/sum").param("a", "2").param("b", "3"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("5.0"));
